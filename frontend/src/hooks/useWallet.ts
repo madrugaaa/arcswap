@@ -34,10 +34,14 @@ export function useWallet() {
                 setChainId(parseInt(chainIdHex, 16));
             });
 
-            // Check initial state
-            providerInstance.send("eth_accounts", []).then((accounts) => {
-                if (accounts.length > 0) setAccount(accounts[0]);
-            });
+            // Check initial state ONLY if not manually disconnected
+            const isManualDisconnect = localStorage.getItem('isManualDisconnect') === 'true';
+
+            if (!isManualDisconnect) {
+                providerInstance.send("eth_accounts", []).then((accounts) => {
+                    if (accounts.length > 0) setAccount(accounts[0]);
+                });
+            }
 
             providerInstance.getNetwork().then((network) => {
                 setChainId(Number(network.chainId));
@@ -48,6 +52,7 @@ export function useWallet() {
     const connect = async () => {
         if (!provider) return;
         try {
+            localStorage.removeItem('isManualDisconnect'); // Clear flag
             const accounts = await provider.send("eth_requestAccounts", []);
             if (accounts.length > 0) setAccount(accounts[0]);
         } catch (error) {
@@ -57,6 +62,7 @@ export function useWallet() {
 
     const disconnect = () => {
         setAccount(null);
+        localStorage.setItem('isManualDisconnect', 'true'); // Set flag
     };
 
     const switchNetwork = async () => {

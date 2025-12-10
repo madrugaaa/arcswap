@@ -226,23 +226,22 @@ export function SwapInterface({ wallet }: SwapInterfaceProps) {
             {/* Buttons */}
             <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
                 {/* Approve Button */}
-                {!isNativeUSDC && (
-                    <button
-                        className="action-btn"
-                        style={{
-                            marginTop: 0,
-                            opacity: (!isAmountValid || approveDone) ? 0.5 : 1,
-                            cursor: (!isAmountValid || approveDone) ? 'default' : 'pointer',
-                            background: approveDone ? 'transparent' : undefined,
-                            border: approveDone ? '1px solid rgba(59, 130, 246, 0.5)' : undefined,
-                            boxShadow: approveDone ? 'none' : undefined
-                        }}
-                        disabled={!isAmountValid || approveDone || isApproving}
-                        onClick={executeApprove}
-                    >
-                        {isApproving ? 'Approving...' : (approveDone ? 'Approved' : 'Approve')}
-                    </button>
-                )}
+                <button
+                    className="action-btn"
+                    style={{
+                        marginTop: 0,
+                        opacity: (isNativeUSDC || approveDone || !isAmountValid) ? 0.5 : 1,
+                        cursor: (isNativeUSDC || approveDone || !isAmountValid) ? 'default' : 'pointer',
+                        background: (isNativeUSDC || approveDone) ? 'transparent' : undefined,
+                        border: (isNativeUSDC || approveDone) ? '1px solid rgba(255, 255, 255, 0.1)' : undefined,
+                        boxShadow: (isNativeUSDC || approveDone) ? 'none' : undefined,
+                        color: (isNativeUSDC || approveDone) ? '#94a3b8' : 'white'
+                    }}
+                    disabled={isNativeUSDC || !isAmountValid || approveDone || isApproving}
+                    onClick={executeApprove}
+                >
+                    {isNativeUSDC ? 'Approved' : (isApproving ? 'Approving...' : (approveDone ? 'Approved' : 'Approve'))}
+                </button>
 
                 {/* Swap Button */}
                 <button

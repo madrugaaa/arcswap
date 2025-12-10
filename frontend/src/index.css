@@ -78,17 +78,19 @@ button:focus-visible {
 
 /* Premium Glassmorphism Card */
 .swap-card {
-  background: rgba(15, 23, 42, 0.6);
-  /* Slate 900 with opacity */
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(15, 23, 42, 0.75);
+  /* Slightly darker/more opaque for presence */
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 28px;
+  padding: 32px;
+  /* Increased padding */
   width: 100%;
-  max-width: 460px;
-  /* Slightly narrower like Uniswap */
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  max-width: 540px;
+  /* Increased width */
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.6);
+  /* Deeper shadow */
 }
 
 .card-header {
