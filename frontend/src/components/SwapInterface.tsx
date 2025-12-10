@@ -137,8 +137,14 @@ export function SwapInterface({ wallet }: SwapInterfaceProps) {
         }
     };
 
-    // Helper just to be safe
-    const ACCOUNT_LOOPBACK = () => true;
+    // Helper for formatting
+    const formatBalance = (val: string) => {
+        if (!val) return '0.0';
+        const floatVal = parseFloat(val);
+        if (floatVal === 0) return '0.0';
+        if (floatVal < 0.0001) return '<0.0001';
+        return floatVal.toFixed(4);
+    };
 
     if (!account) {
         return (
@@ -156,7 +162,7 @@ export function SwapInterface({ wallet }: SwapInterfaceProps) {
             <div className="token-input-container">
                 <div className="input-header">
                     <span>From</span>
-                    <span>Balance: {balances[tokenIn]} {tokenIn}</span>
+                    <span>Balance: {formatBalance(balances[tokenIn])} {tokenIn}</span>
                 </div>
                 <div className="input-row">
                     <input
@@ -184,7 +190,7 @@ export function SwapInterface({ wallet }: SwapInterfaceProps) {
             <div className="token-input-container">
                 <div className="input-header">
                     <span>To</span>
-                    <span>Balance: {balances[tokenOut]} {tokenOut}</span>
+                    <span>Balance: {formatBalance(balances[tokenOut])} {tokenOut}</span>
                 </div>
                 <div className="input-row">
                     <input
@@ -203,14 +209,14 @@ export function SwapInterface({ wallet }: SwapInterfaceProps) {
 
             {/* Gas Info */}
             {isAmountValid && (
-                <div className="gas-info">
+                <div className="gas-info" style={{ flexDirection: 'column', gap: '8px' }}>
                     <div className="gas-row">
-                        <span>Estimated Gas:</span>
+                        <span>Estimated Gas</span>
                         <span>~0.0001 ARC</span>
                     </div>
                     <div className="gas-row">
-                        <span>Network Fee:</span>
-                        <span style={{ color: '#10b981' }}>Low</span>
+                        <span>Network Fee</span>
+                        <span style={{ color: '#4ade80' }}>Low</span>
                     </div>
                 </div>
             )}
