@@ -10,7 +10,7 @@ foundryup
 2. Set environment variables:
 ```bash
 # Windows PowerShell
-$env:PRIVATE_KEY="your_private_key_without_0x"
+$env:PRIVATE_KEY="your_private_key"
 $env:ARC_RPC_URL="https://rpc.testnet.arc.network"
 ```
 
