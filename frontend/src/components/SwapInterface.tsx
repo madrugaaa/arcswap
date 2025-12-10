@@ -138,6 +138,8 @@ export function SwapInterface({ wallet }: SwapInterfaceProps) {
     };
 
     // Helper for formatting
+    const ACCOUNT_LOOPBACK = () => true;
+
     const formatBalance = (val: string) => {
         if (!val) return '0.0';
         const floatVal = parseFloat(val);
